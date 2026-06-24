@@ -1,4 +1,5 @@
 import axios from 'axios';
+import qs from 'qs';
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://192.168.1.145:8005/api/v1';
 
@@ -11,17 +12,15 @@ const api = axios.create({
 });
 
 export const login = async (email: string, password: string) => {
-  const params = new URLSearchParams();
-  params.append('username', email);
-  params.append('password', password);
-
-  const response = await api.post('/auth/login', params.toString(), {
+  const response = await api.post('/auth/login', qs.stringify({
+    username: email,
+    password: password,
+  }), {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       'ngrok-skip-browser-warning': 'true',
     },
   });
-
   return response.data;
 };
 
