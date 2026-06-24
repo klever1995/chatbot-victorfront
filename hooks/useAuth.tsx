@@ -3,7 +3,6 @@ import { router } from 'expo-router';
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { login as loginService } from '../services/auth';
 
-// ==================== TIPOS ====================
 interface User {
   id: number;
   email: string;
@@ -74,11 +73,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       await AsyncStorage.setItem('@KnowledgeBot:token', access_token);
       await AsyncStorage.setItem('@KnowledgeBot:user', JSON.stringify(userData));
 
-      // 🔥 REDIRECCIÓN SEGÚN ROL
       if (userData.rol === 'admin') {
-        router.replace('/pages/admin');
+        router.replace('/pages/admin' as any);
       } else {
-        router.replace('/pages/chat');
+        router.replace('/pages/chat' as any);
       }
     } catch (error: any) {
       console.error('❌ Error en login:', error.message || error);
@@ -93,7 +91,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setUser(null);
     await AsyncStorage.removeItem('@KnowledgeBot:token');
     await AsyncStorage.removeItem('@KnowledgeBot:user');
-    router.replace('/pages/login');
+    router.replace('/pages/login' as any);
   };
 
   const isAdmin = user?.rol === 'admin';

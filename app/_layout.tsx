@@ -13,18 +13,7 @@ export default function RootLayout() {
   return (
     <AuthProvider>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          {/* Pantallas de autenticación */}
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="pages/login" options={{ headerShown: false }} />
-          <Stack.Screen name="pages/registro" options={{ headerShown: false }} />
-          
-          {/* Pantallas protegidas */}
-          <Stack.Screen name="pages/admin" options={{ headerShown: false }} />
-          <Stack.Screen name="pages/chat" options={{ headerShown: false }} />
-          
-          <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-        </Stack>
+        <Stack screenOptions={{ headerShown: false }} />
         <StatusBar style="auto" />
       </ThemeProvider>
     </AuthProvider>
